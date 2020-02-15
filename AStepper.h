@@ -1,4 +1,4 @@
-class GStepper
+class AStepper
 {
     const unsigned long minPeriod = 100;
     int _plug;
@@ -17,7 +17,7 @@ class GStepper
     void stepWithoutRecord();
 
 public:
-    GStepper(const unsigned long pulsePin, const unsigned long directionPin, const unsigned long sleepPin,
+    AStepper(const unsigned long pulsePin, const unsigned long directionPin, const unsigned long sleepPin,
                 unsigned long stepsPerRotate = 200, unsigned long cropFactor = 16, int plug = 1);
     void begin();
     void rotateInfinit(int degreePerSec);

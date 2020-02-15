@@ -1,7 +1,7 @@
-#include "gstepper.h"
+#include "AStepper.h"
 #include <Arduino.h>
 
-GStepper::GStepper(const unsigned long pulsePin, const unsigned long directionPin, const unsigned long sleepPin,
+AStepper::AStepper(const unsigned long pulsePin, const unsigned long directionPin, const unsigned long sleepPin,
                 unsigned long stepsPerRotate, unsigned long cropFactor, int plug)
 {
     _direction = false;
@@ -18,7 +18,7 @@ GStepper::GStepper(const unsigned long pulsePin, const unsigned long directionPi
     _stepsBack = 0;
 }
 
-void GStepper::begin()
+void AStepper::begin()
 {
     pinMode(_pulsePin, OUTPUT);
     pinMode(_directionPin, OUTPUT);
@@ -28,7 +28,7 @@ void GStepper::begin()
     off();
 }
 
-void GStepper::step()
+void AStepper::step()
 {
     digitalWrite(_pulsePin, HIGH);
     digitalWrite(_pulsePin, LOW);
@@ -36,13 +36,13 @@ void GStepper::step()
     _lastTime = micros();
 }
 
-void GStepper::stepWithoutRecord()
+void AStepper::stepWithoutRecord()
 {
     digitalWrite(_pulsePin, HIGH);
     digitalWrite(_pulsePin, LOW);
 }
 
-void GStepper::rotateInfinit(int degreePerSec)
+void AStepper::rotateInfinit(int degreePerSec)
 {
     if (degreePerSec == 0) return;
     if (degreePerSec < 0)
@@ -60,7 +60,7 @@ void GStepper::rotateInfinit(int degreePerSec)
     if (_period < minPeriod) _period = minPeriod;
 }
 
-void GStepper::rotateAngle(int degree,unsigned int degreePerSec)
+void AStepper::rotateAngle(int degree,unsigned int degreePerSec)
 {
     if ((degree == 0) || (degreePerSec == 0)) return;
     if (degree < 0)
@@ -83,14 +83,15 @@ void GStepper::rotateAngle(int degree,unsigned int degreePerSec)
     _stepsBack = 0;
 }
 
-void GStepper::rotateAngleVibro(int degree, unsigned int degreePerSec, unsigned int stepsBack)
+void AStepper::rotateAngleVibro(int degree, unsigned int degreePerSec, unsigned int stepsBack)
 {
     rotateAngle(degree, degreePerSec);
 
     _stepsBack = stepsBack;
 }
 
-void GStepper::check()
+///put it in "loop" function
+void AStepper::check()
 {
     if (_stepsToDo <= _stepsDone) return;
 
@@ -114,7 +115,7 @@ void GStepper::check()
         step();
 }
 
-void GStepper::checkAndOff()
+void AStepper::checkAndOff()
 {
 
     if (_stepsToDo <= _stepsDone)
@@ -126,18 +127,18 @@ void GStepper::checkAndOff()
     check();
 }
 
-void GStepper::on()
+void AStepper::on()
 {
     digitalWrite(_sleepPin, HIGH);
 //    _lastTime = micros() + 1000;
 }
 
-void GStepper::off()
+void AStepper::off()
 {
     digitalWrite(_sleepPin, LOW);
 }
 
-void GStepper::stop()
+void AStepper::stop()
 {
     _stepsToDo = 0;
     _stepsDone = 0;
