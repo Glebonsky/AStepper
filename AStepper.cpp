@@ -4,18 +4,12 @@
 AStepper::AStepper(const unsigned long pulsePin, const unsigned long directionPin, const unsigned long sleepPin,
                 unsigned long stepsPerRotate, unsigned long cropFactor, int plug)
 {
-    _direction = false;
     _plug = plug;
     _pulsePin = pulsePin;
     _directionPin = directionPin;
     _sleepPin = sleepPin;
     _stepsPerRotate = stepsPerRotate;
     _cropFactor = cropFactor;
-    _period = 0;
-    _stepsToDo = 0;
-    _stepsDone = 0;
-    _lastTime = 0;
-    _stepsBack = 0;
 }
 
 void AStepper::begin()
