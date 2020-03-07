@@ -1,8 +1,12 @@
 #include "AStepper.h"
 #include <Arduino.h>
 
-AStepper::AStepper(const unsigned long pulsePin, const unsigned long directionPin, const unsigned long sleepPin,
-                unsigned long stepsPerRotate, unsigned long cropFactor, int plug)
+AStepper::AStepper(uint8_t pulsePin, 
+                   uint8_t directionPin, 
+                   uint8_t sleepPin,
+                   uint64_t stepsPerRotate, 
+                   uint64_t cropFactor, 
+                   int8_t plug)
 {
     _plug = plug;
     _pulsePin = pulsePin;

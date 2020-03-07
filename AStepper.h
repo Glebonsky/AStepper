@@ -1,12 +1,14 @@
+#include <stdint.h>
+
 class AStepper
 {
 public:
-    AStepper(const unsigned long pulsePin, 
-             const unsigned long directionPin, 
-             const unsigned long sleepPin,
-             unsigned long stepsPerRotate = 200, 
-             unsigned long cropFactor = 16, 
-             int plug = 1);
+    AStepper(uint8_t pulsePin, 
+             uint8_t directionPin, 
+             uint8_t sleepPin,
+             uint64_t stepsPerRotate = 200, 
+             uint64_t cropFactor = 16, 
+             int8_t plug = 1);
              
     void begin();
     void rotateInfinit(int degreePerSec);
@@ -19,19 +21,19 @@ public:
     void stop();
 
 private:
-    const unsigned long minPeriod = 100;
-    int _plug;
+    const uint64_t minPeriod = 100;
+    int8_t _plug;
     bool _direction = false;
-    unsigned long _pulsePin;
-    unsigned long _directionPin;
-    unsigned long _sleepPin;
-    unsigned long _stepsPerRotate;
-    unsigned long _cropFactor;
-    unsigned long _period = 0;
-    unsigned long _stepsToDo = 0;
-    unsigned long _stepsDone = 0;
-    unsigned long _stepsBack = 0;
-    unsigned long _lastTime = 0;
+    uint8_t _pulsePin;
+    uint8_t _directionPin;
+    uint8_t _sleepPin;
+    uint32_t _stepsPerRotate;
+    uint32_t _cropFactor;
+    uint64_t _period = 0;
+    uint64_t _stepsToDo = 0;
+    uint64_t _stepsDone = 0;
+    uint64_t _stepsBack = 0;
+    uint64_t _lastTime = 0;
     void step();
     void stepWithoutRecord();
 };
